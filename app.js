@@ -18,7 +18,9 @@ db.once('open', () => {
 
 const linksSet = require('./models/links')
 
-const tenTo62 = require('./10to62')
+const randomAlphanumeric = require('./functions/randomAlphanumeric')
+
+const decimalToAlphanumeric = require('./functions/decimalToAlphanumeric')
 
 // Setting express handlebars
 app.engine('hbs', exphbs({
@@ -42,13 +44,13 @@ app.get('/shortenlink', (req, res) => {
       res.render('output', { origin: req.headers.host, short_link: links.short_link })
     } else {
       linksSet.count((err, count) => {
-        const short_link = tenTo62(count)
+        const short_link = decimalToAlphanumeric(count)
         linksSet.create({
           origin_link: origin_link,
           short_link: short_link
         }).then(() => res.render('output', { origin: req.headers.host, short_link }))
-      })
-    }
+        // })
+      }
   })
 })
 

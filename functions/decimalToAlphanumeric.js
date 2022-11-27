@@ -1,4 +1,4 @@
-function tenTo62(number, digit = 5) {
+function decimalToAlphanumeric(number, digit = 5) {
   const code = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
   let output = ''
   if (number < 0) {
@@ -13,4 +13,4 @@ function tenTo62(number, digit = 5) {
   return output + code[0].repeat(digit - output.length)
 }
 
-module.exports = tenTo62
+module.exports = decimalToAlphanumeric
